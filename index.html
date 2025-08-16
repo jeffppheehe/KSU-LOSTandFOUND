@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Campus Lost & Found</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header>
+    <h1>🎒 Campus Lost & Found</h1>
+    <nav>
+      <button class="tab-btn" data-tab="auth">Login / Register</button>
+      <button class="tab-btn" data-tab="report-lost">Report Lost</button>
+      <button class="tab-btn" data-tab="report-found">Report Found</button>
+      <button class="tab-btn" data-tab="search">Search</button>
+      <button class="tab-btn" data-tab="claims">My Claims</button>
+      <button class="tab-btn" data-tab="admin">Admin</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Auth -->
+    <section id="auth" class="tab active">
+      <div class="card">
+        <h2>Register</h2>
+        <form id="registerForm">
+          <div class="grid">
+            <input name="student_id" placeholder="Student ID" required />
+            <input name="name" placeholder="Full Name" required />
+            <input name="email" type="email" placeholder="Email" required />
+            <input name="password" type="password" placeholder="Password" required />
+          </div>
+          <button>Sign Up</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <div class="grid">
+            <input name="email" type="email" placeholder="Email" required />
+            <input name="password" type="password" placeholder="Password" required />
+          </div>
+          <button>Login</button>
+        </form>
+        <p id="currentUser"></p>
+      </div>
+    </section>
+
+    <!-- Report Lost -->
+    <section id="report-lost" class="tab">
+      <div class="card">
+        <h2>Report Lost Item</h2>
+        <form id="lostForm" enctype="multipart/form-data">
+          <div class="grid">
+            <input name="item_name" placeholder="Item name" required />
+            <input name="category" placeholder="Category (e.g., ID, Wallet, Book)" />
+            <input name="date_lost" type="date" />
+            <input name="location" placeholder="Where was it lost?" />
+            <textarea name="description" placeholder="Describe the item"></textarea>
+            <input name="photo" type="file" accept="image/*"/>
+          </div>
+          <button>Submit Lost Report</button>
+        </form>
+        <div id="lostMatches"></div>
+      </div>
+    </section>
+
+    <!-- Report Found -->
+    <section id="report-found" class="tab">
+      <div class="card">
+        <h2>Report Found Item</h2>
+        <form id="foundForm" enctype="multipart/form-data">
+          <div class="grid">
+            <input name="item_name" placeholder="Item name" required />
+            <input name="category" placeholder="Category (e.g., ID, Wallet, Book)" />
+            <input name="date_found" type="date" />
+            <input name="location" placeholder="Where was it found?" />
+            <textarea name="description" placeholder="Describe the item"></textarea>
+            <input name="photo" type="file" accept="image/*"/>
+          </div>
+          <button>Submit Found Report</button>
+        </form>
+        <div id="foundMatches"></div>
+      </div>
+    </section>
+
+    <!-- Search -->
+    <section id="search" class="tab">
+      <div class="card">
+        <h2>Search Items</h2>
+        <div class="grid">
+          <input id="searchQuery" placeholder="Keywords..." />
+          <input id="searchLocation" placeholder="Location..." />
+          <select id="searchCategory">
+            <option value="">All Categories</option>
+            <option>ID</option>
+            <option>Wallet</option>
+            <option>Gadget</option>
+            <option>Book</option>
+            <option>Clothing</option>
+            <option>Other</option>
+          </select>
+          <select id="searchType">
+            <option value="lost">Lost</option>
+            <option value="found">Found</option>
+          </select>
+          <button id="searchBtn">Search</button>
+        </div>
+        <div id="results" class="list"></div>
+      </div>
+    </section>
+
+    <!-- Claims -->
+    <section id="claims" class="tab">
+      <div class="card">
+        <h2>My Claims</h2>
+        <form id="claimForm" enctype="multipart/form-data">
+          <div class="grid">
+            <input name="lost_item_id" placeholder="Lost Item ID (optional)" />
+            <input name="found_item_id" placeholder="Found Item ID (optional)" />
+            <textarea name="proof_text" placeholder="Describe proof of ownership"></textarea>
+            <input name="proof_photo" type="file" accept="image/*"/>
+          </div>
+          <button>Submit Claim</button>
+        </form>
+        <div id="myClaims" class="list"></div>
+      </div>
+    </section>
+
+    <!-- Admin -->
+    <section id="admin" class="tab">
+      <div class="card">
+        <h2>Admin Panel (demo)</h2>
+        <p>Default admin: <code>admin@example.com</code> / <code>admin123</code></p>
+        <div class="grid">
+          <button id="loadStats">Load Stats</button>
+          <button id="loadClaims">Load Pending Claims</button>
+        </div>
+        <div id="stats"></div>
+        <div id="adminClaims" class="list"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Campus Lost & Found — Thesis Starter</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
